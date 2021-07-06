@@ -5,7 +5,7 @@ target 'MercadoLibre_Technical_Test' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for MercadoLibre_Technical_Test
+  pod 'Alamofire', '~> 5.4'
 
   target 'MercadoLibre_Technical_TestTests' do
     inherit! :search_paths

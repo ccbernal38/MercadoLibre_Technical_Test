@@ -11,7 +11,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        NetworkService.shared.consumeWebService(request: CommunicationModel.Request(method: .get, url: "https://pokeapi.co/api/v2/pokemon/ditto2q"), success: { response in
+            print(response)
+        }, error: { error in
+            print(error)
+        })
     }
 
 
