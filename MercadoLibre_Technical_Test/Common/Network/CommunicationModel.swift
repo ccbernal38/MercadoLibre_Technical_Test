@@ -17,26 +17,13 @@ struct CommunicationModel {
     struct Request {
         var method: HTTPMethod
         var url: String
-        var isSecureRequest: Bool = false
-        var isSecureResponse: Bool = true
-        var addSessionId: Bool = false
-        var headers: [AnyHashable: Any] = [:]
         var requestBody: [String: Any] = [:]
         
         init(method: HTTPMethod,
              url: String,
-             isSecureRequest: Bool = false,
-             isSecureResponse: Bool = true,
-             addSessionId : Bool = false,
-             headers: [AnyHashable: Any] = [:],
              requestBody: [String: Any] = [:]) {
-            
             self.method = method
-            self.url = url
-            self.isSecureRequest = isSecureRequest
-            self.isSecureResponse = isSecureResponse
-            self.addSessionId = addSessionId
-            self.headers = headers
+            self.url = ConfigurationHelper.getConfiguration(ConfigurationKey.baseURL) + url
             self.requestBody = requestBody
         }
     }
