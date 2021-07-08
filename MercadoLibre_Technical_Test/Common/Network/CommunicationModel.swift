@@ -9,10 +9,6 @@
 import Foundation
 import Alamofire
 
-class AppSession {
-    var isAuthenticated: Bool = false
-}
-
 struct CommunicationModel {
     struct Request {
         var method: HTTPMethod
@@ -44,14 +40,7 @@ struct CommunicationModel {
             self.statusCode = statusCode
             getData(data: data)
         }
-        
-        func parseResponse<T>(_ type: T.Type) -> T? where T: Codable {
-            if let response = response {
-                return response.deserialize(type: type)
-            }
-            return nil
-        }
-        
+                
         private mutating func getData(data: [AnyHashable: Any]) {
             if let errCode = data["statusCode"] as? String, let statusCode = Int(errCode) {
                 self.statusCode = CommunicationModel.ErrorCode(rawValue: statusCode)

@@ -10,14 +10,19 @@ import UIKit
 
 enum GeneralRoute: IRouter {
     case alert(String, String, ((UIAlertAction) -> Void)?)
+    case detail(MainModel.Product)
+    case result([MainModel.Product])
 }
 
 extension GeneralRoute {
     var module: UIViewController? {
         switch self {
-         case .alert(let title, let message, let completion):
+        case .alert(let title, let message, let completion):
             return showAlert(title: title, message: message, completion: completion)
-            
+        case .result(let products):
+            return ResultConfiguration.setup(parameters: ["products":products])
+        case .detail(let product):
+            return DetailConfiguration.setup(parameters: ["product":product])
         }
     }
     

@@ -6,7 +6,7 @@ target 'MercadoLibre_Technical_Test' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.4'
-
+  pod 'Kingfisher', '~> 6.0'
   target 'MercadoLibre_Technical_TestTests' do
     inherit! :search_paths
     # Pods for testing

@@ -23,12 +23,13 @@ class NetworkService {
      *      - error: Error callback of the service.
      *      - showError: If this value is true, the error of the service will be showed at the current view controller.
      */
-    func consumeWebService(request: CommunicationModel.Request,
+    func consumeWebService<T:Codable>(request: CommunicationModel.Request,
+                                      type:T.Type,
                            success: @escaping SuccessCallback, error: ErrorCallback? = nil) {
         let communicationManager = getNetwork()
         
-        self.helper = NetworkImplementation(communicationManager!, request: request)
-        self.helper?.consume(success: success, error: error)
+        self.helper = NetworkImplementation(communicationManager!, request: request, type: type)
+        self.helper?.consume(success: success, error: error, type: type)
     }
         
     private func getNetwork() -> Session? {

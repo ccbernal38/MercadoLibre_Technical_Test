@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 
-typealias SuccessCallback = (CommunicationModel.BaseResponse) -> Void
+typealias SuccessCallback = (Codable) -> Void
 typealias ErrorCallback = (CommunicationModel.BaseError) -> Void
-
+typealias AnyClass<T> = T.Type
 
 internal class NetworkImplementation: NSObject {
     fileprivate var communicationManager: Session?
@@ -19,10 +19,12 @@ internal class NetworkImplementation: NSObject {
     private var successCallback: SuccessCallback?
     private var errorCallback: ErrorCallback?
     private var requestData: CommunicationModel.Request
+    private var type : Codable.Type
     
-    init(_ communicationManager: Session, request: CommunicationModel.Request? = nil) {
+    init<T:Codable>(_ communicationManager: Session, request: CommunicationModel.Request? = nil, type:T.Type) {
         self.communicationManager = communicationManager
-        self.requestData = request ?? CommunicationModel.Request(method: .post, url: "")
+        self.type = type
+        self.requestData = request ?? CommunicationModel.Request(method: .post, url:  "")
     }
     
     /**
@@ -32,32 +34,28 @@ internal class NetworkImplementation: NSObject {
      *      - error: Error callback of the library.
      *      - showError: Show error at current view controller.
      */
-    func consume(success: SuccessCallback!, error: ErrorCallback? = nil) {
+    func consume<T:Codable>(success: SuccessCallback!, error: ErrorCallback? = nil, type:T.Type) {
         self.successCallback = success
         self.errorCallback = error
         
         self.communicationManager?.request(requestData.url,
                                            method: requestData.method,
                                            parameters: requestData.requestBody)
-            .responseJSON(){ [self] response in
+            .responseDecodable(of: type){ response in
                 switch response.result {
-                case .success:
-                    if let data = response.value as? [String:Any] {
-                        self.successCallback!(CommunicationModel.BaseResponse(data: data))
-                    }else{
-                        self.successCallback!(CommunicationModel.BaseResponse(data: [:]))
-                    }
+                case let .success(value):
+                    self.successCallback!(value)
                 case let .failure(error):
                     if let message = error.errorDescription {
-                        errorCallback!(CommunicationModel.BaseError(description: message,
-                                                                    statusCode: .generalError))
+                        self.errorCallback!(CommunicationModel.BaseError(description: message,
+                                                                         statusCode: .generalError))
                     }else{
-                        errorCallback!(CommunicationModel.BaseError(description: "",
-                                                                    statusCode: .generalError))
+                        self.errorCallback!(CommunicationModel.BaseError(description: "",
+                                                                         statusCode: .generalError))
                     }
                 }
             }
-        
     }
+    
 }
 

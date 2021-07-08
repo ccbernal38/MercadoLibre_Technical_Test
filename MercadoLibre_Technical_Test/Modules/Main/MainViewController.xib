@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="MercadoLibre_Technical_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionCategories" destination="UOD-p4-iIc" id="dK8-6X-a7c"/>
+                <outlet property="searchBar" destination="UwA-XU-mOF" id="YgI-1Q-DBz"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Buscar" translatesAutoresizingMaskIntoConstraints="NO" id="UwA-XU-mOF">
+                    <rect key="frame" x="0.0" y="92" width="390" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Iwr-aS-TUF"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Vxl-bE-B14"/>
+                    </constraints>
+                    <color key="barTintColor" red="1" green="0.94117647059999998" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="kaK-u0-Nlp"/>
+                    </connections>
+                </searchBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmt-Zc-F9g">
+                    <rect key="frame" x="0.0" y="140" width="390" height="704"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j87-fb-mbz">
+                            <rect key="frame" x="20" y="20" width="350" height="664"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-p4-iIc">
+                                    <rect key="frame" x="16" y="37.333333333333314" width="318" height="606.66666666666674"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aE6-ua-s20">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="KPs-2o-mDk"/>
+                                        <outlet property="delegate" destination="-1" id="OgL-sd-FwD"/>
+                                    </connections>
+                                </collectionView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categorias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dV-gF-HFs">
+                                    <rect key="frame" x="8" y="7.9999999999999982" width="334" height="21.333333333333329"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="4dV-gF-HFs" secondAttribute="trailing" constant="8" id="4Zt-3T-AkD"/>
+                                <constraint firstAttribute="trailing" secondItem="UOD-p4-iIc" secondAttribute="trailing" constant="16" id="Ah7-ci-phd"/>
+                                <constraint firstAttribute="bottom" secondItem="UOD-p4-iIc" secondAttribute="bottom" constant="20" id="CnA-yj-8ff"/>
+                                <constraint firstItem="UOD-p4-iIc" firstAttribute="leading" secondItem="j87-fb-mbz" secondAttribute="leading" constant="16" id="OQB-sL-oIg"/>
+                                <constraint firstItem="4dV-gF-HFs" firstAttribute="leading" secondItem="j87-fb-mbz" secondAttribute="leading" constant="8" id="QsQ-de-vMp"/>
+                                <constraint firstItem="UOD-p4-iIc" firstAttribute="top" secondItem="4dV-gF-HFs" secondAttribute="bottom" constant="8" id="WwP-mH-1Lf"/>
+                                <constraint firstItem="4dV-gF-HFs" firstAttribute="top" secondItem="j87-fb-mbz" secondAttribute="top" constant="8" id="cif-e1-uu6"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="bornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" systemColor="systemGray3Color"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                    <constraints>
+                        <constraint firstItem="j87-fb-mbz" firstAttribute="top" secondItem="jmt-Zc-F9g" secondAttribute="top" constant="20" id="Vln-HR-dZm"/>
+                        <constraint firstItem="j87-fb-mbz" firstAttribute="leading" secondItem="jmt-Zc-F9g" secondAttribute="leading" constant="20" id="VpJ-Ih-IYC"/>
+                        <constraint firstAttribute="trailing" secondItem="j87-fb-mbz" secondAttribute="trailing" constant="20" id="dIZ-tw-caN"/>
+                        <constraint firstAttribute="bottom" secondItem="j87-fb-mbz" secondAttribute="bottom" constant="20" id="lM8-U1-0uc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="1" green="0.94117647058823528" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jmt-Zc-F9g" secondAttribute="bottom" id="43G-GR-GgG"/>
+                <constraint firstItem="UwA-XU-mOF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4hE-tp-BHn"/>
+                <constraint firstItem="jmt-Zc-F9g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AZd-m8-H00"/>
+                <constraint firstItem="jmt-Zc-F9g" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Jxh-4G-ZbD"/>
+                <constraint firstItem="UwA-XU-mOF" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="SQ8-ID-R1K"/>
+                <constraint firstItem="UwA-XU-mOF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="4" id="a6m-bI-Pfn"/>
+                <constraint firstItem="jmt-Zc-F9g" firstAttribute="top" secondItem="UwA-XU-mOF" secondAttribute="bottom" constant="4" id="vg2-8C-oLo"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="-207.69230769230768" y="131.51658767772511"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

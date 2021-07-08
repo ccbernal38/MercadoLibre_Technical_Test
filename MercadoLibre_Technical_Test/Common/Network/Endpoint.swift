@@ -8,5 +8,6 @@
 import Foundation
 
 enum Endpoint : String {
-    case test = ""
+    case categories = "categories"
+    case searchProduct = "/search?q="
 }

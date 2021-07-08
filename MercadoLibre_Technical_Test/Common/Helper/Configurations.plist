@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
-	<string>https://developers.mercadolibre.com.ar/es_ar/items-y-busquedas/</string>
+	<string>https://api.mercadolibre.com/sites/MCO/</string>
 </dict>
 </plist>
