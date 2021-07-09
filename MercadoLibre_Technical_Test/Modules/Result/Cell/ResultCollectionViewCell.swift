@@ -18,6 +18,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
     }
 
     func setImage(url:String){
+        imageViewProduct.kf.indicatorType = .activity
         imageViewProduct.kf.setImage(with: URL(string: url))
     }
 }

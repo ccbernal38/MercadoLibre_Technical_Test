@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IResultRouter: class {
-	// do someting...
+    func goToDetailView(product:MainModel.Product)
 }
 
 class ResultRouter: IResultRouter {	
@@ -17,4 +17,8 @@ class ResultRouter: IResultRouter {
 	init(view: ResultViewController?) {
 		self.view = view
 	}
+    
+    func goToDetailView(product: MainModel.Product) {
+        self.view?.navigate(type: .push, module: GeneralRoute.detail(product))
+    }
 }

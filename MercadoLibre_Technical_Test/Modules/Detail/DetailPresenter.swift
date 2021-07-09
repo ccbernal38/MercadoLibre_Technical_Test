@@ -8,7 +8,8 @@
 import UIKit
 
 protocol IDetailPresenter: class {
-	// do someting...
+    func loadProduct(product:MainModel.Product)
+    
 }
 
 class DetailPresenter: IDetailPresenter {	
@@ -17,4 +18,7 @@ class DetailPresenter: IDetailPresenter {
 	init(view: IDetailViewController?) {
 		self.view = view
 	}
+    func loadProduct(product: MainModel.Product) {
+        self.view?.loadData(product: product)
+    }
 }

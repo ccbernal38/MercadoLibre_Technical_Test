@@ -10,6 +10,7 @@ import UIKit
 protocol IResultViewController: class {
 	var router: IResultRouter? { get set }
     func loadResults(products:[MainModel.Product])
+    func goToDetailView(product:MainModel.Product)
 }
 
 class ResultViewController: UIViewController {
@@ -30,7 +31,6 @@ class ResultViewController: UIViewController {
         collectionVIew.register(UINib(nibName: nibResultCollectionViewCell, bundle: .main),
                                 forCellWithReuseIdentifier: nibResultCollectionViewCell)
         self.interactor?.loadProducts()
-
     }
 }
 
@@ -39,11 +39,20 @@ extension ResultViewController: IResultViewController {
         self.listProducts =  products
         collectionVIew.reloadData()
     }
+    
+    func goToDetailView(product: MainModel.Product) {
+        self.router?.goToDetailView(product: product)
+    }
 }
 
 extension ResultViewController: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = listProducts[indexPath.row]
+        self.goToDetailView(product: product)
     }
 }
 
@@ -59,8 +68,6 @@ extension ResultViewController: UICollectionViewDataSource {
         cell?.setImage(url: listProducts[indexPath.row].thumbnail!)
         return cell!
     }
-    
-
 }
 
 extension ResultViewController: UICollectionViewDelegateFlowLayout {

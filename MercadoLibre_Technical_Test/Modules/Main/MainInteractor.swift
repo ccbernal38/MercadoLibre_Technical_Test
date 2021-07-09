@@ -12,6 +12,7 @@ protocol IMainInteractor: class {
     func getCategories()
     func handlerResponseGetCategories(value: [MainModel.Category])
     func searchProducts(value:String)
+    func searchProductByCategory(id:String)
 }
 
 class MainInteractor: IMainInteractor {
@@ -28,9 +29,11 @@ class MainInteractor: IMainInteractor {
         self.manager?.getCategories(success: { response in
             if let data = response as? [MainModel.Category]{
                 self.handlerResponseGetCategories(value: data)
+            }else{
+                self.presenter?.showError()
             }
         }, error: { error in
-            print(error)
+            self.presenter?.showError()
         })
     }
     
@@ -44,9 +47,25 @@ class MainInteractor: IMainInteractor {
                                 success: { response in
                                     if let data = response as? MainModel.ResponseProduct{
                                         self.presenter?.loadProducts(products: data.results)
+                                    }else{
+                                        self.presenter?.showError()
                                     }
                                 }, error: { error in
-                                    print(error)
+                                    self.presenter?.showError()
                                 })
+    }
+    
+    func searchProductByCategory(id: String) {
+        manager?.searchProductsByCategory(id: id,
+                                success: { response in
+                                    if let data = response as? MainModel.ResponseProduct{
+                                        self.presenter?.loadProducts(products: data.results)
+                                    }else{
+                                        self.presenter?.showError()
+                                    }
+                                }, error: { error in
+                                    self.presenter?.showError()
+                                })
+
     }
 }

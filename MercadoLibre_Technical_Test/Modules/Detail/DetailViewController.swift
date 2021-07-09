@@ -9,24 +9,38 @@ import UIKit
 
 protocol IDetailViewController: class {
 	var router: IDetailRouter? { get set }
+    func loadData(product:MainModel.Product)
 }
 
 class DetailViewController: UIViewController {
 	var interactor: IDetailInteractor?
 	var router: IDetailRouter?
 
-	override func viewDidLoad() {
+    @IBOutlet weak var scrollview: UIScrollView!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var imageViewProduct: UIImageView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Detalle"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.scrollview.delegate = self
+        self.interactor?.loadProduct()
     }
 }
 
 extension DetailViewController: IDetailViewController {
-	// do someting...
+    func loadData(product: MainModel.Product) {
+        labelTitle.text = product.title
+        imageViewProduct.kf.indicatorType = .activity
+        imageViewProduct.kf.setImage(with: URL(string: product.thumbnail!))
+    }
 }
 
-extension DetailViewController {
-	// do someting...
+extension DetailViewController:UIScrollViewDelegate {
 }
 
 extension DetailViewController {

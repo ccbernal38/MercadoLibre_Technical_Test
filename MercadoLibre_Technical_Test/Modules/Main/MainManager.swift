@@ -11,6 +11,7 @@ protocol IMainManager: class {
     
     func getCategories(success: @escaping SuccessCallback, error: @escaping ErrorCallback)
     func searchProducts(value: String, success: @escaping SuccessCallback, error: @escaping ErrorCallback)
+    func searchProductsByCategory(id: String, success: @escaping SuccessCallback, error: @escaping ErrorCallback)
     
 }
 
@@ -37,5 +38,19 @@ class MainManager: IMainManager {
                                                 }, error: { errorData in
                                                     error(errorData)
                                                 })
+    }
+    
+    func searchProductsByCategory(id: String, success: @escaping SuccessCallback, error: @escaping ErrorCallback) {
+        let url = Endpoint.searchProductByCategory.rawValue + id
+        let request = CommunicationModel.Request(method: .get,
+                                                 url: url)
+        NetworkService.shared.consumeWebService(request: request,
+                                                type: MainModel.ResponseProduct.self,
+                                                success: { response in
+                                                    success(response)
+                                                }, error: { errorData in
+                                                    error(errorData)
+                                                })
+
     }
 }

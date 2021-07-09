@@ -12,7 +12,7 @@ protocol IMainViewController: class {
     func getCategories()
     func loadData(data:[MainModel.Category])
     func goToViewDetails(products: [MainModel.Product])
-
+    func showError()
 }
 
 class MainViewController: BaseViewController {
@@ -62,6 +62,11 @@ extension MainViewController: IMainViewController {
         self.removeLoading()
         self.router?.goToViewResults(products: products)
     }
+    
+    func showError() {
+        self.removeLoading()
+        self.router?.showError(title:"Alerta", message:"Error en el sistema, intente mas tarde")
+    }
 }
 //MARK: - UICollectionViewDelegate
 
@@ -89,7 +94,11 @@ extension MainViewController:UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nibMainCollectionViewCell,
                                                       for: indexPath) as? MainCollectionViewCell
         let category = self.listCategories![indexPath.row]
-        cell?.labelText.text = category.name
+        cell?.setup(data: category)
+        cell?.callbackClick = { cat in
+            self.showLoading()
+            self.interactor?.searchProductByCategory(id: cat.id!)
+        }
         return cell!
     }
 }

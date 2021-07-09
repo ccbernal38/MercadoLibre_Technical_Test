@@ -10,6 +10,7 @@ import UIKit
 protocol IMainPresenter: class {
     func loadData(data:[MainModel.Category])
     func loadProducts(products: [MainModel.Product])
+    func showError()
 }
 
 class MainPresenter: IMainPresenter {
@@ -26,6 +27,10 @@ class MainPresenter: IMainPresenter {
     
     func loadProducts(products: [MainModel.Product]) {
         self.view?.goToViewDetails(products: products)
+    }
+    
+    func showError() {
+        self.view?.showError()
     }
 
 }

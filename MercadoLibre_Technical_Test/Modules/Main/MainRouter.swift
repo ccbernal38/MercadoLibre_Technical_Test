@@ -9,6 +9,7 @@ import UIKit
 
 protocol IMainRouter: class {
     func goToViewResults(products:[MainModel.Product])
+    func showError(title:String, message:String)
 }
 
 class MainRouter: IMainRouter {	
@@ -22,5 +23,9 @@ class MainRouter: IMainRouter {
      */
     func goToViewResults(products: [MainModel.Product]) {
         self.view?.navigate(type: .push, module: GeneralRoute.result(products))
+    }
+    
+    func showError(title: String, message: String) {
+        self.view?.navigate(type: .present, module: GeneralRoute.alert(title, message,nil))
     }
 }

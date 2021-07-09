@@ -10,4 +10,5 @@ import Foundation
 enum Endpoint : String {
     case categories = "categories"
     case searchProduct = "/search?q="
+    case searchProductByCategory = "/search?category="
 }

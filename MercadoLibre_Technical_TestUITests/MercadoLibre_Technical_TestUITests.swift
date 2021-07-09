@@ -22,21 +22,31 @@ class MercadoLibre_Technical_TestUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testSearchProductsByCategory() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCUIDevice.shared.orientation = .portrait
+        
+        let collectionViews = app.collectionViews
+        collectionViews.cells.element(boundBy: 3).tap()
+        
+        let count = app.collectionViews.cells.count
+        assert(count > 0)
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testSearchProducts() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        let searchField = app.searchFields["Buscar"]
+        searchField.tap()
+        searchField.typeText("ps5")
+        
+        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"buscar\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let count = app.collectionViews.cells.count
+        assert(count > 0)
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol IDetailInteractor: class {
 	var parameters: [String: Any]? { get set }
+    func loadProduct()
 }
 
 class DetailInteractor: IDetailInteractor {
@@ -19,5 +20,11 @@ class DetailInteractor: IDetailInteractor {
     init(presenter: IDetailPresenter, manager: IDetailManager) {
     	self.presenter = presenter
     	self.manager = manager
+    }
+    
+    func loadProduct() {
+        if let product = parameters?["product"] as? MainModel.Product {
+            self.presenter?.loadProduct(product:product)
+        }
     }
 }
