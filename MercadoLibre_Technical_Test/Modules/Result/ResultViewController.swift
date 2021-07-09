@@ -24,10 +24,14 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Resultados"
+        self.navigationController?.navigationBar.backItem?.title = "Atras"
+        self.navigationItem.backButtonTitle = "Atras"
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         collectionVIew.register(UINib(nibName: nibResultCollectionViewCell, bundle: .main),
                                 forCellWithReuseIdentifier: nibResultCollectionViewCell)
         self.interactor?.loadProducts()

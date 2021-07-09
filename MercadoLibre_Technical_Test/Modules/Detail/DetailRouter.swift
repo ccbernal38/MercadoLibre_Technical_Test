@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IDetailRouter: class {
-	// do someting...
+    func goToLink(url:String)
 }
 
 class DetailRouter: IDetailRouter {	
@@ -17,4 +17,9 @@ class DetailRouter: IDetailRouter {
 	init(view: DetailViewController?) {
 		self.view = view
 	}
+    
+    func goToLink(url: String) {
+        let url : URL = URL(string: url)!
+        UIApplication.shared.open(url)
+    }
 }
